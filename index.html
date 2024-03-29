@@ -11,7 +11,7 @@
 <body class="bg-body-tertiary">
 
 <div class="bd-cheatsheet container-fluid bg-body">
-	<br>
+	<br><br>
 	<section id="content">
 		<h2><img src="img/logo.png" width="100" class="me-3" alt="Bootstrap">Game Lineup <button type="button" class="btn btn-primary" onclick="generateLineup()">refresh</button></h2>
 		<div id="lineup"></div> 
@@ -64,7 +64,7 @@
 	  for( var pos of fieldpos ){
 		  if( null != lineup[0][pos] ){
 			var ps = pos.replaceAll('_',' ')
-			row.append('<th class="text-capitalize" scope="col"><b>'+ ps +'</b></th>');
+			row.append('<th class="text-capitalize" scope="col" nowrap><b>'+ ps +'</b></th>');
 		  }
 	  } 
 	  head.append(row);
