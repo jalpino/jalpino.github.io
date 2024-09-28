@@ -3,92 +3,138 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title> Rookie League Lineups</title>
+<title> 2024 U9 PFC</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+<style>
+	.nav-pills .nav-link.active {
+	   background-color: #dc3545;
+	   color: #fff;
+	}
+	.tab-content {
+	  border: 1px solid #dee2e6;
+	  border-top: transparent;
+	  padding: 15px;
+	}
+</style>
 </head>
 <body class="bg-body-tertiary">
 
 <div class="bd-cheatsheet container-fluid bg-body">
 	<br>
-	<h2><img src="img/logo.png" width="100" class="me-3">2024 Marauders (CMRC Rookie League)</h2>
+	<table colspace=0 padding=5 border="0">
+	<tbody>
+	<tr>
+		<td rowspan="2"><img src="img/pfc-logo.png" width="80" class="me-3"></td>
+		<td><h2>2024 Phoenix Football Club (PFC)</h2></td>
+	</tr>
+	<tr>
+		<td id="coaches" class="nav nav-pills" role="tablist">
+		</td>	
+	</tr>
+	</tbody>	
+	</table>
 	<div class="row">
-		<div class="col">
-			<div class="card mb-3">
-			  <div class="card-header text-bg-dark"><h4>Players</h4></div>
-				  <div class="card-body">
-					<div class="card-text">
-						<table class="table table-sm table-striped">
-						<thead>
-						<tr>
-							<th>#</th>
-							<th>Player</th>
-							<th><span title="Games Played">GP</span></th>
-							<th><span title="At Bats">AB</span></th>
-							<th><span title="Hits">H</span></th>
-							<th><span title="Strikeouts">SO</span></th>
-							<th><span title="Walks">BB</span></th>
-							<th><span title="Batting Average">Avg</span></th>
-							<th>Top Positions</th>
-						</tr>
-						</thead>
-						<tbody id="players" class="table-group-divider">
-						</tbody>	
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col">
-			<div class="card mb-3">
-			  <div class="card-header text-bg-warning"><h4>Rookie League Standing</h4></div>
-				  <div class="card-body">
-					<div class="card-text">
-						<h3>
-							<b class="text-success">#7</b>
-							&nbsp;<b>|</b>&nbsp;
-							1 <span class="text-muted">Win</span>&nbsp;&nbsp;
-							4 <span class="text-muted">Loses</span>&nbsp;&nbsp;
-							1 <span class="text-muted">Tie</span>
-						</h3>
-					</div>
-				</div>
-			</div>
+		<div class="col-12">
+			<br>
+			<table class="table table-sm">
+				<thead>
+					<tr>
+						<th class="text-center">Rank</th>	
+						<th class="text-center">W</th>
+						<th class="text-center">L</td>
+						<th class="text-center">T</td>
+						<th class="text-center">F</td>
+						<th class="text-center">A</td>
+						<th class="text-center">P</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="text-center">2</td>
+						<td class="text-center table-success">3</td>
+						<td class="text-center table-danger">0</td>
+						<td class="text-center">0</td>
+						<td class="text-center">22</td>
+						<td class="text-center">5</td>
+						<td class="text-center">9</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
+<script src="js/miner.js"></script>
+<script src="js/team.js"></script>
 <script>
-	var batting = "11	Joel	5	14	2	0	16	.875\n"+
-			"4	Quentin	4	8	2	0	10	.800\n"+
-			"6	Nick	6	15	4	1	19	.789\n"+
-			"10	William	6	15	4	0	19	.789\n"+
-			"9	Jack	5	9	3	1	12	.750\n"+
-			"2	Luke	5	10	4	0	14	.714\n"+
-			"8	Joey	6	11	5	0	16	.688\n"+
-			"12	Ian	5	8	5	0	13	.615\n"+
-			"0	Austin	5	6	5	1	11	.545\n"+
-			"1	Ben	6	9	8	1	17	.529\n"+
-			"3	Weston	3	3	3	0	6	.500\n"+
-			"5	Emerson	5	5	7	0	12	.417\n"+
-			"7	Lilly	4	1	8	0	9	.111";
+	
+	let coaches = [
+		{active:true, name:'Evans',division:'C-Classic South',standings:'https://www.cmsasoccer.com/Season/2024CMSAFallLeagueSaturdayBoys/League/U092016Boys/Calendar'},
+		{name:'Bishop',division:'B-Challenge',standings:'https://www.cmsasoccer.com/Season/2024CMSAFallLeagueSaturdayBoys/League/U092016Boys/Calendar'}
+	];
+	let divisions = [];
 
-var tbody = $('#players');
-var players = batting.split("\n");
-for( var i=0; i<players.length; i++){
-	var stat = players[i].split("\t");
-	var tr = $('<tr>');
-	tr.append('<td>'+ stat[0] +'</td>');
-	tr.append('<td>'+ stat[1] +'</td>');
-	tr.append('<td>'+ stat[2] +'</td>');
-	tr.append('<td>'+ stat[6] +'</td>');
-	tr.append('<td>'+ stat[3] +'</td>');
-	tr.append('<td>'+ stat[4] +'</td>');
-	tr.append('<td>'+ stat[5] +'</td>');
-	tr.append('<td>'+ stat[7] +'</td>');
-	tr.append('<td> </td>');
-	tbody.append(tr);
-}
+	function showCoaches(){
+		let coachtabs = $('#coaches');
+		for( let i=0; i < coaches.length; i++ ){
+			let cc = coaches[i];
+			coachtabs.append('<button class="nav-link '+ ( cc.active ?'active':'') +'" id="nav-'+ cc.name +'-tab" data-bs-toggle="tab" data-bs-target="#'+ cc.name +'-home" type="button" role="tab" aria-controls="pills-home" aria-selected="'+ ( cc.active ?'true':'false') +'">'+ cc.name +'</button>');
+		}
+	}
+	
+	// parse statndings from CSMA
+	function loadStandings(){
+		$.ajax('https://www.cmsasoccer.com/Season/2024CMSAFallLeagueSaturdayBoys/League/U092016Boys/Calendar')
+			.done(function( data ){
+				let miner = new Miner(data);
+				let pagebase = miner
+								.extract('body')
+								.remove('script')
+								.remove('footer')
+								.remove('header')
+								.getContent();
+				
+				
+				let standingsContainer = $(pagebase).find('.StandingsContainer');
+				let divContainers = $(standingsContainer).find('h2');
+				
+				// extract divisions and team stats 
+				divContainers.next('.standingsTable').each( function(index,el){
+					// division name
+					let divName = $(el).prev('h2').text().replace('Standings','');
+					let divInfo = {name:divName, teams:[]};
+					divisions.push(divInfo);
+					
+					// teams 
+					$(el).find('tbody tr').each( function(index,row ){
+						let cols = $(row).find('td');
+						let parts = cols.get(0).innerHTML.split('(');
+
+						let team = new Team();
+							team.division = divName;
+							team.name = parts[0].trim();
+							team.coach = parts[1].trim().substring(0,parts[1].length-2); 
+							team.games = parseInt(cols.get(1).innerText);
+							team.wins = parseInt(cols.get(2).innerText);
+							team.losses = parseInt(cols.get(3).innerText);
+							team.ties = parseInt(cols.get(4).innerText);
+							team.points = parseInt(cols.get(5).innerText);
+						
+						divInfo.teams.push( team );
+						
+					});
+					
+				})
+				
+			})
+			.fail(function(xhr){
+				console.log(xhr);
+			})
+
+	}
+	showCoaches();
+	loadStandings();
+	console.log(divisions)
 </script>
 </body>
 <html>
